@@ -53,12 +53,12 @@ def read_images_from_file(file):
             
         return images
 
-def save(image, id, label):
-    location = "images/%05d-%d.png"
+def save(image, name, id, label):
+    location = "images/%s-%05d-%d.png"
     img = np.array(image)
     img = pil.fromarray(img)
     img = img.convert('RGB')
-    img.save(location % (id, label))
+    img.save(location % (name, id, label))
 
 train_labels = read_labels_from_file('data/train-labels-idx1-ubyte.gz')
 test_labels = read_labels_from_file('data/t10k-labels-idx1-ubyte.gz')
@@ -66,16 +66,17 @@ test_labels = read_labels_from_file('data/t10k-labels-idx1-ubyte.gz')
 train_images = read_images_from_file('data/train-images-idx3-ubyte.gz')
 test_images = read_images_from_file('data/t10k-images-idx3-ubyte.gz')
 
+#will print out an image 
 for row in train_images[4999]:
     for col in row:
         print('.' if col <= 127 else '#', end='')
     print()
     
-for i in range(len(train_images)):  #NOTE:  will create 60,000 png images
-    save(train_images[i], (i+1), train_labels[i])        
+for i in range(len(train_images)):  #   Please note: this will create 60,000 png images
+    save(train_images[i],'train', (i+1), train_labels[i])        
 
-for i in range(len(test_images)):#NOTE: will create 10,000 png images
-    save(test_images[i], (i+1), test_labels[i])
+for i in range(len(test_images)):   #   Please note: this will create 10,000 png images
+    save(test_images[i],'test', (i+1), test_labels[i])
     
         
     
