@@ -2,7 +2,8 @@
 #   https://stackoverflow.com/questions/12902540/read-from-a-gzip-file-in-python
 #   https://stackoverflow.com/questions/2872381/how-to-read-a-file-byte-by-byte-in-python-and-how-to-print-a-bytelist-as-a-binar
 import gzip
-import io
+import numpy as np
+import PIL.Image as pil
 
 def read_labels_from_file(filename) :
     with gzip.open(filename, 'rb') as f:
@@ -51,9 +52,16 @@ def read_images_from_file(file):
             images.append(rows)
             
         return images
-    
-    
 
+def save(image, id, label):
+    location = "images/%05d-%d.png"
+    img = np.array(image)
+    img = pil.fromarray(img)
+    img = img.convert('RGB')
+    img.save(location % (id, label))
+
+train_labels = read_labels_from_file('data/train-labels-idx1-ubyte.gz')
+test_labels = read_labels_from_file('data/t10k-labels-idx1-ubyte.gz')
             
 train_images = read_images_from_file('data/train-images-idx3-ubyte.gz')
 test_images = read_images_from_file('data/t10k-images-idx3-ubyte.gz')
@@ -62,15 +70,13 @@ for row in train_images[4999]:
     for col in row:
         print('.' if col <= 127 else '#', end='')
     print()
-        
-import PIL.Image as pil
-img = train_image[4999]
-img = np.array(img)
-img = pil.fromarray(img)
-img = img.convert('RGB')
-img.show()
-img.save('2.png')
-        
+    
+for i in range(len(train_images)):  #NOTE:  will create 60,000 png images
+    save(train_images[i], (i+1), train_labels[i])        
+
+for i in range(len(test_images)):#NOTE: will create 10,000 png images
+    save(test_images[i], (i+1), test_labels[i])
+    
         
     
         
