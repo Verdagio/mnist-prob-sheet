@@ -289,3 +289,5 @@ __pycache__/
 
 # ignore any png files
 .images/*.png 
+
+.idea/
