@@ -41,7 +41,7 @@ That will create our images directory (the location where the images will be sav
 
 ```python mnist.py```
 
-Note.. this will generate approximately 69,000 .png images in the image/ directory 
+Note.. this will generate approximately 70,000 .png images in the images/ directory 
 
 ### Asignment specification
 
