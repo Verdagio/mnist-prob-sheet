@@ -31,7 +31,13 @@ With that out of the way we can go to the directory of the project
 
 ```cd path/to/directory```
 
-Once in the project directory we will use the following command to run the a script
+Once in the project directory we will use the following commands to run the scripts
+
+First run:
+
+```python setup.py```
+
+That will create our images directory (the location where the images will be saved), now run:
 
 ```python mnist.py```
 

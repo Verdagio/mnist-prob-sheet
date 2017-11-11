@@ -287,7 +287,3 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-# ignore any png files
-.images/*.png 
-
-.idea/
